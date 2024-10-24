@@ -148,5 +148,17 @@ docker-compose up -d
 Debería de salir algo a esto
 ![img.png](consolaCompose.png)
 
+# 5. accedemos a wordpress
+```bash
+#introducimos en la barra de búsqueda
+http://192.168.1.46:8000/wp-admin/install.php
+
+#tambien vale
+http://192.168.1.46:8000
+```
+![img.png](wordpressConfirmation.png)
+
+enhorabuena, has completado la guía: :smiley:
+
 
 
