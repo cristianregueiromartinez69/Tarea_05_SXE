@@ -70,3 +70,70 @@ MYSQL_PASSWORD: Establece la contraseña para el usuario wordpress_user.
 
 ```
 
+# 3. detallar especificaciones de wordpress en el docker-compose.yml
+
+Vamos a crear el servicio de wordpress en el compose:
+```bash
+wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: 123456789
+      WORDPRESS_DB_NAME: wordpress
+
+volumes:
+  db_data:
+
+```
+
+## EXPLICACIÓN  
+
+-   wordpress:
+    depends_on:
+    - db
+```bash
+Esta línea asegura que el contenedor de WordPress no se iniciará hasta que el servicio db (MariaDB) esté en marcha. WordPress necesita conectarse a la base de datos para funcionar correctamente.
+
+```
+- image: wordpress:latest
+
+```bash
+Aquí se indica que el contenedor de WordPress se basará en la imagen wordpress, utilizando la última versión disponible en Docker Hub.
+```
+
+- ports:
+ - "8000:80"
+```bash
+Esto hace un mapeo de puertos entre el contenedor y tu máquina host. El puerto 80 es el puerto que utiliza Apache (el servidor web dentro del contenedor de WordPress), y el puerto 8000 es el puerto en tu máquina. Esto significa que puedes acceder a WordPress en tu navegador desde http://(ip maquina):8000.
+```
+
+- restart: always
+```bash
+ Al igual que el servicio de db, esto asegura que el contenedor de WordPress se reinicie automáticamente si falla.
+```
+
+- environment:
+
+```bash
+WORDPRESS_DB_HOST: db: WordPress se conectará a MariaDB en el contenedor db.
+WORDPRESS_DB_USER: wordpress_user: El nombre de usuario que WordPress usará para conectarse a MariaDB.
+WORDPRESS_DB_PASSWORD: 123456789: La contraseña para el usuario de base de datos wordpress_user.
+WORDPRESS_DB_NAME: wordpress: El nombre de la base de datos a la que se conectará WordPress (la misma que creaste en el servicio db).
+```
+
+# NO PERTENECIENTE A WORDPRESS  
+- volumes:
+  db_data:
+```bash
+Aquí defines un volumen llamado db_data. Este volumen se asocia con el contenedor de MariaDB para guardar las bases de datos de forma persistente en tu máquina.
+
+```
+
+
+
