@@ -135,5 +135,18 @@ Aquí defines un volumen llamado db_data. Este volumen se asocia con el contened
 
 ```
 
+# 4. lanzamiento del docker compose
+- Nos posicionamos en donde se encuentra el docker compose
+```bash
+#En mi caso sería
+cd carpetasCompose
+
+#comando que inicia el docker compose
+docker-compose up -d
+
+```
+Debería de salir algo a esto
+![img.png](consolaCompose.png)
+
 
 
